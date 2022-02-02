@@ -1,10 +1,9 @@
 import 'dart:developer';
 
+import 'package:cupertino_youtube_player/cupertino_youtube_player.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
-import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 import 'video_list.dart';
 

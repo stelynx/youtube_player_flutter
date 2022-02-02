@@ -2,7 +2,7 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 
 import '../utils/duration_formatter.dart';
 import '../utils/youtube_player_controller.dart';
@@ -57,7 +57,7 @@ class _CurrentPositionState extends State<CurrentPosition> {
         _controller.value.position.inMilliseconds,
       ),
       style: const TextStyle(
-        color: Colors.white,
+        color: CupertinoColors.white,
         fontSize: 12.0,
       ),
     );
@@ -115,7 +115,7 @@ class _RemainingDurationState extends State<RemainingDuration> {
             (_controller.value.position.inMilliseconds),
       )}",
       style: const TextStyle(
-        color: Colors.white,
+        color: CupertinoColors.white,
         fontSize: 12.0,
       ),
     );

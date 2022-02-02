@@ -2,9 +2,7 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter/scheduler.dart';
+import 'package:flutter/cupertino.dart';
 
 import '../enums/thumbnail_quality.dart';
 import '../utils/errors.dart';
@@ -13,6 +11,8 @@ import '../utils/youtube_player_controller.dart';
 import '../utils/youtube_player_flags.dart';
 import '../widgets/widgets.dart';
 import 'raw_youtube_player.dart';
+
+const Color _kRedColor = Color(0xFFF44336);
 
 /// A widget to play or stream YouTube videos using the official [YouTube IFrame Player API](https://developers.google.com/youtube/iframe_api_reference).
 ///
@@ -47,85 +47,85 @@ class YoutubePlayer extends StatefulWidget {
   /// A [YoutubePlayerController] to control the player.
   final YoutubePlayerController controller;
 
-  /// {@template youtube_player_flutter.width}
+  /// {@template cupertino_youtube_player.width}
   /// Defines the width of the player.
   ///
   /// Default is devices's width.
   /// {@endtemplate}
   final double? width;
 
-  /// {@template youtube_player_flutter.aspectRatio}
+  /// {@template cupertino_youtube_player.aspectRatio}
   /// Defines the aspect ratio to be assigned to the player. This property along with [width] calculates the player size.
   ///
   /// Default is 16 / 9.
   /// {@endtemplate}
   final double aspectRatio;
 
-  /// {@template youtube_player_flutter.controlsTimeOut}
+  /// {@template cupertino_youtube_player.controlsTimeOut}
   /// The duration for which controls in the player will be visible.
   ///
   /// Default is 3 seconds.
   /// {@endtemplate}
   final Duration controlsTimeOut;
 
-  /// {@template youtube_player_flutter.bufferIndicator}
+  /// {@template cupertino_youtube_player.bufferIndicator}
   /// Overrides the default buffering indicator for the player.
   /// {@endtemplate}
   final Widget? bufferIndicator;
 
-  /// {@template youtube_player_flutter.progressColors}
+  /// {@template cupertino_youtube_player.progressColors}
   /// Overrides default colors of the progress bar, takes [ProgressColors].
   /// {@endtemplate}
   final ProgressBarColors progressColors;
 
-  /// {@template youtube_player_flutter.progressIndicatorColor}
+  /// {@template cupertino_youtube_player.progressIndicatorColor}
   /// Overrides default color of progress indicator shown below the player(if enabled).
   /// {@endtemplate}
   final Color progressIndicatorColor;
 
-  /// {@template youtube_player_flutter.onReady}
+  /// {@template cupertino_youtube_player.onReady}
   /// Called when player is ready to perform control methods like:
   /// play(), pause(), load(), cue(), etc.
   /// {@endtemplate}
   final VoidCallback? onReady;
 
-  /// {@template youtube_player_flutter.onEnded}
+  /// {@template cupertino_youtube_player.onEnded}
   /// Called when player had ended playing a video.
   ///
   /// Returns [YoutubeMetaData] for the video that has just ended playing.
   /// {@endtemplate}
   final void Function(YoutubeMetaData metaData)? onEnded;
 
-  /// {@template youtube_player_flutter.liveUIColor}
+  /// {@template cupertino_youtube_player.liveUIColor}
   /// Overrides color of Live UI when enabled.
   /// {@endtemplate}
   final Color liveUIColor;
 
-  /// {@template youtube_player_flutter.topActions}
+  /// {@template cupertino_youtube_player.topActions}
   /// Adds custom top bar widgets.
   /// {@endtemplate}
   final List<Widget>? topActions;
 
-  /// {@template youtube_player_flutter.bottomActions}
+  /// {@template cupertino_youtube_player.bottomActions}
   /// Adds custom bottom bar widgets.
   /// {@endtemplate}
   final List<Widget>? bottomActions;
 
-  /// {@template youtube_player_flutter.actionsPadding}
+  /// {@template cupertino_youtube_player.actionsPadding}
   /// Defines padding for [topActions] and [bottomActions].
   ///
   /// Default is EdgeInsets.all(8.0).
   /// {@endtemplate}
   final EdgeInsetsGeometry actionsPadding;
 
-  /// {@template youtube_player_flutter.thumbnail}
+  /// {@template cupertino_youtube_player.thumbnail}
   /// Thumbnail to show when player is loading.
   ///
   /// If not set, default thumbnail of the video is shown.
   /// {@endtemplate}
   final Widget? thumbnail;
 
-  /// {@template youtube_player_flutter.showVideoProgressIndicator}
+  /// {@template cupertino_youtube_player.showVideoProgressIndicator}
   /// Defines whether to show or hide progress indicator below the player.
   ///
   /// Default is false.
@@ -144,14 +144,14 @@ class YoutubePlayer extends StatefulWidget {
     ProgressBarColors? progressColors,
     this.onReady,
     this.onEnded,
-    this.liveUIColor = Colors.red,
+    this.liveUIColor = _kRedColor,
     this.topActions,
     this.bottomActions,
     this.actionsPadding = const EdgeInsets.all(8.0),
     this.thumbnail,
     this.showVideoProgressIndicator = false,
   })  : progressColors = progressColors ?? const ProgressBarColors(),
-        progressIndicatorColor = progressIndicatorColor ?? Colors.red;
+        progressIndicatorColor = progressIndicatorColor ?? _kRedColor;
 
   /// Converts fully qualified YouTube Url to video id.
   ///
@@ -231,17 +231,16 @@ class _YoutubePlayerState extends State<YoutubePlayer> {
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      elevation: 0,
-      color: Colors.black,
+    return Container(
+      color: CupertinoColors.black,
       child: InheritedYoutubePlayer(
         controller: controller,
         child: Container(
-          color: Colors.black,
+          color: CupertinoColors.black,
           width: widget.width ?? MediaQuery.of(context).size.width,
           child: _buildPlayer(
             errorWidget: Container(
-              color: Colors.black87,
+              color: CupertinoColors.black.withOpacity(0.87),
               padding:
                   const EdgeInsets.symmetric(horizontal: 40.0, vertical: 20.0),
               child: Column(
@@ -251,8 +250,8 @@ class _YoutubePlayerState extends State<YoutubePlayer> {
                   Row(
                     children: [
                       const Icon(
-                        Icons.error_outline,
-                        color: Colors.white,
+                        CupertinoIcons.xmark_circle,
+                        color: CupertinoColors.white,
                       ),
                       const SizedBox(width: 5.0),
                       Expanded(
@@ -264,7 +263,7 @@ class _YoutubePlayerState extends State<YoutubePlayer> {
                                 : controller.initialVideoId,
                           ),
                           style: const TextStyle(
-                            color: Colors.white,
+                            color: CupertinoColors.white,
                             fontWeight: FontWeight.w300,
                             fontSize: 15.0,
                           ),
@@ -276,7 +275,7 @@ class _YoutubePlayerState extends State<YoutubePlayer> {
                   Text(
                     'Error Code: ${controller.value.errorCode}',
                     style: const TextStyle(
-                      color: Colors.grey,
+                      color: CupertinoColors.systemGrey,
                       fontWeight: FontWeight.w300,
                     ),
                   ),
@@ -334,7 +333,7 @@ class _YoutubePlayerState extends State<YoutubePlayer> {
                 ignoring: true,
                 child: ProgressBar(
                   colors: widget.progressColors.copyWith(
-                    handleColor: Colors.transparent,
+                    handleColor: const Color(0x00000000),
                   ),
                 ),
               ),
@@ -375,7 +374,7 @@ class _YoutubePlayerState extends State<YoutubePlayer> {
                                   colors: widget.progressColors,
                                 ),
                                 RemainingDuration(),
-                                const PlaybackSpeedButton(),
+                                // const PlaybackSpeedButton(),
                                 FullScreenButton(),
                               ],
                         ),
@@ -419,7 +418,7 @@ class _YoutubePlayerState extends State<YoutubePlayer> {
         ),
         fit: BoxFit.cover,
         loadingBuilder: (_, child, progress) =>
-            progress == null ? child : Container(color: Colors.black),
+            progress == null ? child : Container(color: CupertinoColors.black),
         errorBuilder: (context, _, __) => Image.network(
           YoutubePlayer.getThumbnail(
             videoId: controller.metadata.videoId.isEmpty
@@ -428,8 +427,9 @@ class _YoutubePlayerState extends State<YoutubePlayer> {
             webp: false,
           ),
           fit: BoxFit.cover,
-          loadingBuilder: (_, child, progress) =>
-              progress == null ? child : Container(color: Colors.black),
+          loadingBuilder: (_, child, progress) => progress == null
+              ? child
+              : Container(color: CupertinoColors.black),
           errorBuilder: (context, _, __) => Container(),
         ),
       );

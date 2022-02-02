@@ -2,7 +2,7 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 
 import '../enums/player_state.dart';
 import '../utils/youtube_player_controller.dart';
@@ -79,17 +79,20 @@ class _PlayPauseButtonState extends State<PlayPauseButton>
         visible: _playerState == PlayerState.cued ||
             !_controller.value.isPlaying ||
             _controller.value.isControlsVisible,
-        child: Material(
-          color: Colors.transparent,
-          child: InkWell(
-            borderRadius: BorderRadius.circular(50.0),
-            onTap: () => _controller.value.isPlaying
-                ? _controller.pause()
-                : _controller.play(),
-            child: AnimatedIcon(
-              icon: AnimatedIcons.play_pause,
-              progress: _animController.view,
-              color: Colors.white,
+        child: GestureDetector(
+          onTap: () => _controller.value.isPlaying
+              ? _controller.pause()
+              : _controller.play(),
+          child: AnimatedContainer(
+            duration: const Duration(milliseconds: 100),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(50.0),
+            ),
+            child: Icon(
+              _controller.value.isPlaying
+                  ? CupertinoIcons.pause
+                  : CupertinoIcons.play,
+              color: CupertinoColors.white,
               size: 60.0,
             ),
           ),
@@ -101,9 +104,7 @@ class _PlayPauseButtonState extends State<PlayPauseButton>
         Container(
           width: 70.0,
           height: 70.0,
-          child: const CircularProgressIndicator(
-            valueColor: AlwaysStoppedAnimation(Colors.white),
-          ),
+          child: const CupertinoActivityIndicator(),
         );
   }
 }

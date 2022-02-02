@@ -5,7 +5,7 @@
 import 'dart:async';
 import 'dart:developer';
 
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 import '../controller.dart';
 import '../player_value.dart';

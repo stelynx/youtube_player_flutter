@@ -1,14 +1,14 @@
 import 'dart:io';
 import 'dart:ui' show window;
 
+import 'package:cupertino_youtube_player/src/player/youtube_player.dart';
+import 'package:cupertino_youtube_player/src/utils/youtube_player_controller.dart';
+import 'package:cupertino_youtube_player/src/utils/youtube_player_flags.dart';
+import 'package:cupertino_youtube_player/src/widgets/widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:youtube_player_flutter/src/player/youtube_player.dart';
-import 'package:youtube_player_flutter/src/utils/youtube_player_controller.dart';
-import 'package:youtube_player_flutter/src/utils/youtube_player_flags.dart';
-import 'package:youtube_player_flutter/src/widgets/widgets.dart';
 
 Widget buildPlayer({
   required YoutubePlayerController controller,

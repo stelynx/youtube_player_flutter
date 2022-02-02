@@ -4,7 +4,7 @@
 
 import 'dart:async';
 
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 
 import '../utils/duration_formatter.dart';
 import '../utils/youtube_player_controller.dart';
@@ -139,8 +139,8 @@ class _TouchShutterState extends State<TouchShutter> {
             child: AnimatedContainer(
               duration: const Duration(milliseconds: 300),
               color: _controller.value.isControlsVisible
-                  ? Colors.black.withAlpha(150)
-                  : Colors.transparent,
+                  ? CupertinoColors.black.withAlpha(150)
+                  : const Color(0x00000000),
               child: _dragging
                   ? Center(
                       child: Container(
@@ -148,14 +148,14 @@ class _TouchShutterState extends State<TouchShutter> {
                         decoration: BoxDecoration(
                           borderRadius:
                               const BorderRadius.all(Radius.circular(5.0)),
-                          color: Colors.black.withAlpha(150),
+                          color: CupertinoColors.black.withAlpha(150),
                         ),
                         child: Text(
                           "$seekDuration ($seekPosition)",
                           style: const TextStyle(
                             fontSize: 26.0,
                             fontWeight: FontWeight.w400,
-                            color: Colors.white,
+                            color: CupertinoColors.white,
                           ),
                         ),
                       ),

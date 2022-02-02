@@ -1,7 +1,7 @@
-import 'package:flutter/material.dart';
+import 'package:cupertino_youtube_player/cupertino_youtube_player.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
-import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 /// A wrapper for [YoutubePlayer].
 class YoutubePlayerBuilder extends StatefulWidget {

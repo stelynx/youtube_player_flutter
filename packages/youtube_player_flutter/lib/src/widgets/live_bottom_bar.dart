@@ -2,7 +2,7 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 
 import '../utils/youtube_player_controller.dart';
 import 'duration_widgets.dart';
@@ -83,7 +83,7 @@ class _LiveBottomBarState extends State<LiveBottomBar> {
           CurrentPosition(),
           Expanded(
             child: Padding(
-              child: Slider(
+              child: CupertinoSlider(
                 value: _currentSliderPosition,
                 onChanged: (value) {
                   _controller.seekTo(
@@ -95,24 +95,21 @@ class _LiveBottomBarState extends State<LiveBottomBar> {
                   );
                 },
                 activeColor: widget.liveUIColor,
-                inactiveColor: Colors.transparent,
+                thumbColor: widget.liveUIColor,
               ),
               padding: const EdgeInsets.symmetric(
                 horizontal: 8.0,
               ),
             ),
           ),
-          InkWell(
+          GestureDetector(
             onTap: () => _controller.seekTo(_controller.metadata.duration),
-            child: Material(
-              color: widget.liveUIColor,
-              child: const Text(
-                ' LIVE ',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 12.0,
-                  fontWeight: FontWeight.w300,
-                ),
+            child: const Text(
+              ' LIVE ',
+              style: TextStyle(
+                color: CupertinoColors.white,
+                fontSize: 12.0,
+                fontWeight: FontWeight.w300,
               ),
             ),
           ),

@@ -2,7 +2,7 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 
 import '../utils/youtube_player_controller.dart';
 
@@ -17,7 +17,7 @@ class FullScreenButton extends StatefulWidget {
   /// Creates [FullScreenButton] widget.
   FullScreenButton({
     this.controller,
-    this.color = Colors.white,
+    this.color = CupertinoColors.white,
   });
 
   @override
@@ -57,11 +57,12 @@ class _FullScreenButtonState extends State<FullScreenButton> {
 
   @override
   Widget build(BuildContext context) {
-    return IconButton(
-      icon: Icon(
+    return CupertinoButton(
+      minSize: 0,
+      child: Icon(
         _controller.value.isFullScreen
-            ? Icons.fullscreen_exit
-            : Icons.fullscreen,
+            ? CupertinoIcons.fullscreen_exit
+            : CupertinoIcons.fullscreen,
         color: widget.color,
       ),
       onPressed: () => _controller.toggleFullScreenMode(),
